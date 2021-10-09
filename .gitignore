@@ -1,0 +1,4 @@
+database.ini
+venv/
+.ipynb_checkpoints/
+__pycache__
