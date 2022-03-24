@@ -1,4 +1,8 @@
-database.ini
 venv/
 .ipynb_checkpoints/
-__pycache__
+**/.DS_Store
+**/__pycache__
+Prod/
+*.ini
+.vscode/
+.dockerignore
