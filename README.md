@@ -1,12 +1,12 @@
 # Bitcoin_Price_Predictor
 
-* A Machine Learning(ML) model that predicts if Bitcoins price will go up or down 7 days from now using it's basic historical data in order to be better than dollar cost averaging. 
+* A Machine Learning(ML) model that predicts if Bitcoins price will go up or down 7 days from now using its basic historical data to be better than dollar-cost averaging. 
 * [Check it out](http://futurecryptoprice.io/)
 * Check out the architecture
 * Read below for motivation, how to rebuild it locally, and model performance 
 
 ## Motivation :
-I wanted to build an end to end Data ML product that didn't just live locally on my laptop. I also wanted to build a Web3 data related product, so I chose to provide an answer to a question I had, which was how can I be better than just [dollar cost averaging](https://www.investopedia.com/terms/d/dollarcostaveraging.asp#:~:text=Dollar%2Dcost%20averaging%20(DCA)%20is%20an%20investment%20strategy%20in,price%20and%20at%20regular%20intervals.) Bitcoin? 
+I wanted to build an end-to-end ML project that didn't just live locally on my laptop. I also wanted to develop a Web3 data-related product, so I chose to provide an answer to a question I had, which was how can I be better at [dollar-cost averaging](https://www.investopedia.com/terms/d/dollarcostaveraging.asp#:~:text=Dollar%2Dcost%20averaging%20(DCA)%20is%20an%20investment%20strategy%20in,price%20and%20at%20regular%20intervals.) Bitcoin? 
 
 
 ## Rebuilding Locally:
@@ -31,7 +31,7 @@ password=<your_postgres_password>
 
 
 ## Model Performance 
-* I set my model accuracy goal as anything % greater than 50% since my goal was to be better dollar cost averaging. Plus I didn't want to spend too much time on the modeling since this was going to an end to end project.
+* I set my model accuracy goal as anything % more than 50% since my goal was to be better at dollar-cost averaging. Plus, I didn't want to spend too much time on the modeling since this was an end-to-end project..
 
 Prediction completed.
  Model Accuracy is: 53.5%
