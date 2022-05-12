@@ -5,9 +5,10 @@ import datetime
 
 # imports for database
 import psycopg2 as pg
+import pickle
 from joblib import dump, load
 import streamlit as st
-
+from knnClassifer import Classifier
 
 # SQL Query
 sql = """
@@ -26,23 +27,28 @@ predicted_date += datetime.timedelta(days=7)  # increment date by 7 days for pre
 
 
 # drop the entry_id and date column
-df.drop(['entry_id', "price_date"], axis=1, inplace=True)
+df.drop(["entry_id", "price_date"], axis=1, inplace=True)
 
 # create new df and shifts all columns by 7 days
 data = pd.DataFrame()  # create new df
 for col in df.columns:
     for i in range(6, 0, -1):  # range for num of days
-        data[f'{col}-{i}'] = df[col].shift(i)
+        data[f"{col}-{i}"] = df[col].shift(i)
 
 # drop NA that are created during the shift
 data.dropna(axis=0, inplace=True)
 
+# scale the data
+classifier = Classifier(connect, 58.4)
+scaler = classifier.train()
+scaled_data = scaler.transform(data)
 
 # read in final model file
-loaded_model = load('final_model.joblib')
+loaded_model = pickle.load(open("final_model.pkl", "rb"))
+# loaded_model = load("final_model.joblib")
 
 # prediction for 7 days from now
-prediction = loaded_model.predict_proba(data)
+prediction = loaded_model.predict_proba(scaled_data)
 
 output_message = ""
 # checks the output of the prediction
@@ -52,21 +58,28 @@ else:
     output_message = "BUY NOW!!"
 
 # write welcome page for users
-st.write("""
+st.write(
+    """
 
 # Simple Bitcoin Price Predictor App
 
 Below is a prediction of if Bitcoin's price will go up or down 7 days from today.
 
 """
-         )
+)
 if output_message == "BUY NOW":
-    st.success(f"My model predicts that Bitcoin will increase in price on {predicted_date}. \
-    Maybe you should buy. ")
+    st.success(
+        f"My model predicts that Bitcoin will increase in price on {predicted_date}. \
+    Maybe you should buy. "
+    )
     st.write(f"This prediction was ran on {date}")
 else:
-    st.error(f"My model predicts that Bitcoin will decrease in price on {predicted_date}. \
-    Maybe you should sell.")
+    st.error(
+        f"My model predicts that Bitcoin will decrease in price on {predicted_date}. \
+    Maybe you should sell."
+    )
     st.write(f"This prediction was ran on {date}")
-st.caption("DISCLOSURE: I am not a financial advisor. This is just a fun project. \
-You are responsible for your own financial decisions.")
+st.caption(
+    "DISCLOSURE: I am not a financial advisor. This is just a fun project. \
+You are responsible for your own financial decisions."
+)

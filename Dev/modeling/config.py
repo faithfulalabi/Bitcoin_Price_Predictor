@@ -1,7 +1,7 @@
-
 from configparser import ConfigParser
 
-def config(filename='database.ini', section='postgresql'):
+
+def config(filename="database.ini", section="postgresql"):
     """
     We read and make items in database.ini file all key value pairs
     """
@@ -18,6 +18,6 @@ def config(filename='database.ini', section='postgresql'):
         for param in params:
             db[param[0]] = param[1]
     else:
-        raise Exception(f'Section {section} not found in the {filename} file')
+        raise Exception(f"Section {section} not found in the {filename} file")
 
     return db

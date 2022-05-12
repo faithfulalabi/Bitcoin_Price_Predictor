@@ -6,3 +6,4 @@ Prod/
 *.ini
 .vscode/
 .dockerignore
+.DS_Store
